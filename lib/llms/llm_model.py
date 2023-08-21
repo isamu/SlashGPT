@@ -1,4 +1,4 @@
-from lib.chat_config import ChatConfig
+from lib.slash_gpt_config import SlashGPTConfig
 
 class LlmModel:
     def __init__(self, llm_model_data):
@@ -13,7 +13,7 @@ class LlmModel:
     def max_token(self):
         return self.get("max_token") or 4096
 
-    def check_api_key(self, config: ChatConfig):
+    def check_api_key(self, config: SlashGPTConfig):
         if self.get("api_key"):
             return config.has_value_for_key(self.get("api_key"));
         return True

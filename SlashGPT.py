@@ -10,8 +10,8 @@ from gtts import gTTS
 from playsound import playsound
 
 from lib.jupyter_runtime import PythonRuntime
-from lib.chat_session import ChatSession
-from lib.chat_config import ChatConfig
+from lib.slash_gpt_session import SlashGPTSession
+from lib.slash_gpt_config import SlashGPTConfig
 from lib.llms.models import llm_models, get_llm_model_from_key
 
 class InputStyle(Enum):
@@ -56,7 +56,7 @@ manifests = {
 Main is a singleton, which process the input from the user and manage chat sessions.
 """
 class Main:
-    def __init__(self, config: ChatConfig, manifest_key: str):
+    def __init__(self, config: SlashGPTConfig, manifest_key: str):
         self.config = config
 
         self.exit = False
@@ -69,10 +69,10 @@ class Main:
     """
     def switch_context(self, manifest_key: str, intro: bool = True):
         if manifest_key is None:
-            self.context = ChatSession(self.config)
+            self.context = SlashGPTSession(self.config)
             return
         if self.config.exist_manifest(manifest_key):
-            self.context = ChatSession(self.config, manifest_key=manifest_key)
+            self.context = SlashGPTSession(self.config, manifest_key=manifest_key)
             if self.config.verbose:
                 print(colored(f"Activating: {self.context.title} (model={self.context.llm_model.name()}, temperature={self.context.temperature}, max_token={self.context.llm_model.max_token()})", "blue"))
             else:
@@ -312,7 +312,7 @@ class Main:
 
         
 if __name__ == '__main__':
-    config = ChatConfig("./manifests/main")
+    config = SlashGPTConfig("./manifests/main")
     print(config.ONELINE_HELP)
     main = Main(config, 'dispatcher')
     main.start()

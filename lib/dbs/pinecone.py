@@ -2,16 +2,16 @@ import pinecone
 import tiktoken  # for counting tokens
 import openai
 
-from lib.chat_config import ChatConfig
+from lib.slash_gpt_config import SlashGPTConfig
 
 class DBPinecone:
     @classmethod
-    def factory(cls, table_name, config: ChatConfig):
+    def factory(cls, table_name, config: SlashGPTConfig):
         if table_name and config.PINECONE_API_KEY and config.PINECONE_ENVIRONMENT:
             assert table_name in pinecone.list_indexes(), f"No Pinecone table named {table_name}"
             return DBPinecone(table_name, config)
     
-    def __init__(self, config: ChatConfig):
+    def __init__(self, config: SlashGPTConfig):
         self.config = config
         self.index = pinecone.Index(table_name)
             

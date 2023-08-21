@@ -27,9 +27,9 @@ LONG_HELP = """
 """
 
 """
-ChatConfig is a singleton, which holds global states, including various secret keys and the list of manifests.
+SlashGPTConfig is a singleton, which holds global states, including various secret keys and the list of manifests.
 """
-class ChatConfig:
+class SlashGPTConfig:
     def __init__(self, pathManifests):
         # Load various keys from .env file
         load_dotenv() 

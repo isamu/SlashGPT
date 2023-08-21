@@ -8,7 +8,7 @@ import google.generativeai.types as safety_types
 from termcolor import colored
 import replicate
 
-from lib.chat_config import ChatConfig
+from lib.slash_gpt_config import SlashGPTConfig
 from lib.llms.models import llm_models, get_llm_model_from_manifest
 
 from lib.log import create_log_dir, save_log
@@ -18,12 +18,12 @@ from lib.function_action import FunctionAction
 from lib.dbs.pinecone import DBPinecone
 
 """
-ChatSession represents a chat session with a particular AI agent.
+SlashGPTSession represents a chat session with a particular AI agent.
 The key is the identifier of the agent.
 The manifest specifies behaviors of the agent.
 """
-class ChatSession:
-    def __init__(self, config: ChatConfig, manifest_key: str = "GPT"):
+class SlashGPTSession:
+    def __init__(self, config: SlashGPTConfig, manifest_key: str = "GPT"):
         self.config = config
         self.manifest_key = manifest_key
 
