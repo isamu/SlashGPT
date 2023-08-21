@@ -16,6 +16,7 @@ from lib.manifest import Manifest
 from lib.function_call import FunctionCall
 from lib.function_action import FunctionAction
 from lib.dbs.pinecone import DBPinecone
+from lib.printer import Printer
 
 """
 ChatSession represents a chat session with a particular AI agent.
@@ -68,6 +69,8 @@ class ChatSession:
         if self.functions and self.config.verbose:
             print(self.functions)
 
+        Printer.session_init(self)
+            
     def set_manifest(self):
         manifest_data = self.config.get_manifest_data(self.manifest_key)
         self.manifest = Manifest(manifest_data if manifest_data else {}, self.manifest_key)

@@ -6,13 +6,12 @@ if platform.system() == "Darwin":
 import json
 from enum import Enum
 from termcolor import colored
-from gtts import gTTS
-from playsound import playsound
 
 from lib.jupyter_runtime import PythonRuntime
 from lib.chat_session import ChatSession
 from lib.chat_config import ChatConfig
 from lib.llms.models import llm_models, get_llm_model_from_key
+from lib.printer import Printer
 
 class InputStyle(Enum):
   HELP = 1
@@ -23,11 +22,6 @@ class InputStyle(Enum):
 """
 utility functions for Main class
 """
-
-def play_text(text, lang):
-    audio_obj = gTTS(text=text, lang=lang, slow=False)
-    audio_obj.save("./output/audio.mp3")
-    playsound("./output/audio.mp3")
 
 manifests = {
     "main": {
@@ -73,10 +67,6 @@ class Main:
             return
         if self.config.exist_manifest(manifest_key):
             self.context = ChatSession(self.config, manifest_key=manifest_key)
-            if self.config.verbose:
-                print(colored(f"Activating: {self.context.title} (model={self.context.llm_model.name()}, temperature={self.context.temperature}, max_token={self.context.llm_model.max_token()})", "blue"))
-            else:
-                print(colored(f"Activating: {self.context.title}", "blue"))
             if self.context.get_manifest_attr("notebook"):
                 (result, _) = self.runtime.create_notebook(self.context.llm_model.name() )
                 print(colored(f"Created a notebook: {result.get('notebook_name')}", "blue"))
@@ -103,8 +93,11 @@ class Main:
             return InputStyle.TALK
 
     def display_oneline_help(self):
-        print(self.config.ONELINE_HELP)
+        Printer.print_oneline_help(self.print_option())
 
+    def print_option(self): 
+        return {"audio": self.config.audio}
+        
     def process_sample(self, question: str):
         (key, commands) = self.parse_question(question)
         if commands[0] == "sample" and len(commands) > 1:
@@ -138,7 +131,7 @@ class Main:
         (key, commands) = self.parse_question(question)
         if commands[0] == "help":
             if (len(commands) == 1):
-                print(self.config.LONG_HELP)
+                Printer.print_long_help(self.print_option())
                 list = "\n".join(self.config.help_list())
                 print(f"Agents:\n{list}")
             if (len(commands) == 2):
@@ -199,10 +192,7 @@ class Main:
             (responseRole, res, function_call) = self.context.generate_response()
 
             if responseRole and res:
-                print(f"\033[92m\033[1m{self.context.botName}\033[95m\033[0m: {res}")
-
-                if self.config.audio:
-                    play_text(res, self.config.audio)
+                Printer.print_bot_response(self.context.botName, res, self.print_option())
 
                 self.context.append_message(responseRole, res)
                 self.context.save_log()
@@ -211,6 +201,7 @@ class Main:
                 (question, function_name) = self.process_function_call(function_call)
                 if question:
                     role = "function" if function_name or self.context.skip_function_result() else "user"
+                    
                     print(f"\033[95m\033[1mfunction({function_name}): \033[95m\033[0m{question}")
                     self.context.append_message(role, question, function_name)
                     if not self.context.skip_function_result():
@@ -313,6 +304,6 @@ class Main:
         
 if __name__ == '__main__':
     config = ChatConfig("./manifests/main")
-    print(config.ONELINE_HELP)
+    Printer.print_oneline_help()
     main = Main(config, 'dispatcher')
     main.start()
