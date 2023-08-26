@@ -78,4 +78,4 @@ class Main:
 if __name__ == "__main__":
     config = ChatConfig("./manifests/agents")
     main = Main(config)
-    main.start("自由と国家について")
+    main.start("地球環境について政府や企業の取るべき行動について議論します")
