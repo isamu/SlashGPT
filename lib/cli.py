@@ -16,8 +16,6 @@ def cli():
 
     args = parser.parse_args()
 
-
-    
     with open("./manifests/manifests.json", "r") as f:
         manifests_manager = json.load(f)
 
