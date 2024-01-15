@@ -27,6 +27,10 @@
     "manifests_dir": "manifests/ss",
     "default_agent_name": "blip2"
   },
+  "car": {
+    "manifests_dir": "manifests/car",
+    "default_agent_name": "dispatcher"
+  },
   "doctor": {
     "manifests_dir": "manifests/doctor",
     "default_agent_name": "reception"

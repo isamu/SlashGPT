@@ -1,0 +1,18 @@
+title: air conditioner
+description: air con
+prompt: |
+  Don't make any assumptions about what property values to plug into functions.
+  Ask for clarification if a user request is ambiguous.
+sample: |
+  play music
+modelx: gpt-4-0613
+temperature: 0
+functions: ./resources/functions/air_conditioner.json
+actions: 
+  control_aircon:
+    type: message_template
+    message: Success. control_aircon called. action is {action}
+  set_temperature:
+    type: message_template
+    message: Success. set_temperature called. temperature set to {temperature}
+skip_function_result: true

@@ -1,0 +1,18 @@
+title: audio
+description: audio
+prompt: |
+  Don't make any assumptions about what property values to plug into functions.
+  Ask for clarification if a user request is ambiguous.
+sample: |
+  play music
+modelx: gpt-4-0613
+temperature: 0
+functions: ./resources/functions/audio.json
+actions: 
+  control_audio:
+    type: message_template
+    message: Success. control_audio called. action is {action}
+  change_music:
+    type: message_template
+    message: Success. change_music called. action is {action}
+skip_function_result: true
