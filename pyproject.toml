@@ -6,7 +6,7 @@ line_length = 150
 
 [tool.poetry]
 name = "slashgpt"
-version = "0.0.7"
+version = "0.0.8"
 description = ""
 authors = ["snakajima <satoshi.nakajima@gmail.com>"]
 license = "MIT"
@@ -27,8 +27,8 @@ python-dotenv = "1.0.0"
 termcolor = "^2.3.0"
 bs4 = "^0.0.1"
 tiktoken = "^0.4.0"
-pydantic = "1.10"
 requests-toolbelt = "^1.0.0"
+pyyaml = "^6.0.1"
 
 [tool.poetry.dependencies.pyobjc]
 version = "^9.2"
@@ -46,6 +46,7 @@ gql = "^3.4.1"
 yfinance = "^0.2.28"
 scipy= "^1.11.1"
 codeboxapi="^0.0.9"
+pydantic = "1.10"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.5.1"
