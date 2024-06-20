@@ -1,0 +1,29 @@
+[
+  {
+    "name": "search_route",
+    "description": "search route",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "distination": {
+          "type": "string"
+        }
+      },
+      "required": ["distination"]
+    }
+  },
+  {
+    "name": "search_poi",
+    "description": "search poi",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "poi_name": {
+          "type": "string",
+          "description": "poi name"
+        }
+      },
+      "required": ["poi_name"]
+    }
+  }
+]

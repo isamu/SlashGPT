@@ -1,0 +1,31 @@
+[
+  {
+    "name": "control_audio",
+    "description": "Play action",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["play", "stop", "pause"]
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "change_music",
+    "description": "Change music",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Change music",
+          "enum": ["next", "previous"]
+        }
+      },
+      "required": ["action"]
+    }
+  }
+]

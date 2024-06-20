@@ -1,0 +1,18 @@
+title: navigation
+description: navigation
+prompt: |
+  Don't make any assumptions about what property values to plug into functions.
+  Ask for clarification if a user request is ambiguous.
+sample: |
+  navigation
+modelx: gpt-4-0613
+temperature: 0
+functions: ./resources/functions/navigation.json
+actions: 
+  search_route:
+    type: message_template
+    message: Success. search_route called. route is ....
+  search_poi:
+    type: message_template
+    message: Success. search poi called. poi is is 123, lat = 35, lng = 139
+skip_function_result: true

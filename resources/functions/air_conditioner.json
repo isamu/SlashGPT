@@ -1,0 +1,30 @@
+[
+  {
+    "name": "control_aircon",
+    "description": "Control air conditioner",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "type": "string",
+          "enum": ["on", "off"]
+        }
+      },
+      "required": ["action"]
+    }
+  },
+  {
+    "name": "set_temperature",
+    "description": "Set the temperature",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "temperature": {
+          "type": "number",
+          "description": "Car temperature in celsius."
+        }
+      },
+      "required": ["temperature"]
+    }
+  }
+]
